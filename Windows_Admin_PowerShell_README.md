@@ -244,4 +244,4 @@ A collection of hands-on labs focused on **Windows system administration**, **us
 
 ---
 
-*Portfolio maintained by [Your Name] · [LinkedIn] · [Your Email]*
+*Portfolio maintained by [Oladapo Afolabi] · [https://www.linkedin.com/in/oladapo-afolabi-561834145/] · [oladapokafolabi@gmail.com]*
