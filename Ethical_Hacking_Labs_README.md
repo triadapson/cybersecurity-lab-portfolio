@@ -209,4 +209,4 @@ Security awareness training · Strong password policies · MFA/2FA · Email filt
 
 ---
 
-*Portfolio maintained by [Your Name] · [LinkedIn] · [Your Email]*
+*Portfolio maintained by [Oladapo Afolabi] · [https://www.linkedin.com/in/oladapo-afolabi-561834145/] · [oladapokafolabi@gmail.com]*
