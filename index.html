@@ -1,1 +1,311 @@
-test
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cybersecurity Lab Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #080c10;
+    --bg2: #0d1117;
+    --bg3: #111820;
+    --accent: #00ff88;
+    --accent2: #00c8ff;
+    --accent3: #ff6b35;
+    --text: #e8f0f8;
+    --muted: #6b8099;
+    --border: rgba(0,255,136,0.15);
+    --border2: rgba(0,200,255,0.12);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'Syne', sans-serif; overflow-x: hidden; }
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: linear-gradient(rgba(0,255,136,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,255,136,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none; z-index: 0;
+  }
+  body::after {
+    content: '';
+    position: fixed; inset: 0;
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.04) 2px, rgba(0,0,0,0.04) 4px);
+    pointer-events: none; z-index: 0;
+  }
+
+  /* TICKER */
+  .ticker { background: rgba(0,255,136,0.04); border-bottom: 1px solid var(--border); padding: 12px 0; overflow: hidden; position: relative; z-index: 10; }
+  .ticker-inner { display: flex; gap: 60px; white-space: nowrap; animation: ticker 30s linear infinite; font-family: 'Space Mono', monospace; font-size: 11px; color: var(--accent); letter-spacing: 0.1em; }
+  .ticker-inner span { opacity: 0.6; }
+  .ticker-inner span::before { content: '//  '; opacity: 0.4; }
+  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* HEADER */
+  header { position: relative; z-index: 10; padding: 80px 5% 60px; border-bottom: 1px solid var(--border); display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 40px; max-width: 1400px; margin: 0 auto; }
+  .prompt { font-family: 'Space Mono', monospace; font-size: 12px; color: var(--accent); letter-spacing: 0.15em; margin-bottom: 20px; opacity: 0; animation: fadeUp 0.6s ease forwards 0.2s; }
+  .prompt::before { content: '> '; opacity: 0.5; }
+  h1 { font-size: clamp(40px, 7vw, 88px); font-weight: 800; line-height: 0.95; letter-spacing: -0.03em; opacity: 0; animation: fadeUp 0.6s ease forwards 0.4s; }
+  h1 .line1 { display: block; color: var(--text); }
+  h1 .line2 { display: block; color: var(--accent); }
+  h1 .line3 { display: block; color: var(--muted); font-weight: 400; font-size: 0.5em; letter-spacing: 0.05em; margin-top: 12px; }
+  .header-meta { text-align: right; opacity: 0; animation: fadeUp 0.6s ease forwards 0.6s; }
+  .stat-row { display: flex; gap: 32px; justify-content: flex-end; margin-bottom: 20px; }
+  .stat-num { font-size: 36px; font-weight: 800; color: var(--accent2); line-height: 1; }
+  .stat-label { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 4px; }
+  .badge-row { display: flex; gap: 8px; justify-content: flex-end; flex-wrap: wrap; }
+  .badge { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.12em; padding: 4px 10px; border: 1px solid; text-transform: uppercase; }
+  .badge-green { border-color: var(--accent); color: var(--accent); }
+  .badge-blue  { border-color: var(--accent2); color: var(--accent2); }
+  .badge-orange{ border-color: var(--accent3); color: var(--accent3); }
+
+  /* MAIN */
+  main { position: relative; z-index: 10; max-width: 1400px; margin: 0 auto; padding: 0 5% 100px; }
+  .section-label { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: var(--accent); text-transform: uppercase; padding: 60px 0 32px; display: flex; align-items: center; gap: 16px; }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, var(--border) 0%, transparent 100%); }
+
+  /* GRID */
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 2px; }
+
+  /* CARD */
+  .card { background: var(--bg2); border: 1px solid var(--border2); padding: 32px; position: relative; overflow: hidden; cursor: pointer; transition: border-color 0.2s, background 0.2s; opacity: 0; animation: fadeUp 0.5s ease forwards; text-decoration: none; display: block; color: inherit; }
+  .card:hover { background: var(--bg3); border-color: rgba(0,255,136,0.4); }
+  .card:hover .card-glow { opacity: 1; }
+  .card:hover .card-num { color: var(--accent); }
+  .card:hover .card-arrow { transform: translate(4px,-4px); opacity: 1; }
+  .card-glow { position: absolute; top: 0; right: 0; width: 120px; height: 120px; background: radial-gradient(circle at top right, rgba(0,255,136,0.08), transparent 70%); opacity: 0; transition: opacity 0.3s; pointer-events: none; }
+  .card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; }
+  .card-num { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--muted); letter-spacing: 0.1em; transition: color 0.2s; }
+  .card-arrow { font-size: 18px; color: var(--accent); opacity: 0.4; transition: transform 0.2s, opacity 0.2s; }
+  .card-tag { display: inline-block; font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 0.15em; text-transform: uppercase; padding: 3px 8px; border: 1px solid; margin-bottom: 14px; }
+  .card h2 { font-size: 20px; font-weight: 800; line-height: 1.2; margin-bottom: 12px; letter-spacing: -0.02em; }
+  .card-desc { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 24px; }
+  .card-stats { display: flex; gap: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.05); }
+  .card-stat-num { font-family: 'Space Mono', monospace; font-size: 18px; font-weight: 700; line-height: 1; }
+  .card-stat-label { font-size: 10px; color: var(--muted); margin-top: 3px; letter-spacing: 0.05em; }
+
+  .tag-a { border-color: rgba(0,255,136,0.3);  color: var(--accent); }
+  .tag-b { border-color: rgba(0,200,255,0.3);  color: var(--accent2); }
+  .tag-c { border-color: rgba(255,107,53,0.3); color: var(--accent3); }
+  .tag-d { border-color: rgba(180,100,255,0.3); color: #b464ff; }
+  .tag-e { border-color: rgba(255,210,0,0.3);  color: #ffd200; }
+
+  .stat-a { color: var(--accent); }
+  .stat-b { color: var(--accent2); }
+  .stat-c { color: var(--accent3); }
+  .stat-d { color: #b464ff; }
+  .stat-e { color: #ffd200; }
+
+  /* TOOLS */
+  .tools-grid { display: flex; flex-wrap: wrap; gap: 8px; padding: 24px 0 0; }
+  .tool-chip { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.08em; padding: 6px 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); color: var(--muted); transition: all 0.15s; }
+  .tool-chip:hover { border-color: var(--accent); color: var(--accent); background: rgba(0,255,136,0.05); }
+
+  /* FOOTER */
+  footer { position: relative; z-index: 10; border-top: 1px solid var(--border); padding: 40px 5%; max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+  .footer-left { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--muted); line-height: 1.8; }
+  .footer-left span { color: var(--accent); }
+  .footer-links { display: flex; gap: 20px; }
+  .footer-links a { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--muted); text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.15s; }
+  .footer-links a:hover { color: var(--accent); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .card:nth-child(1) { animation-delay: 0.1s; }
+  .card:nth-child(2) { animation-delay: 0.15s; }
+  .card:nth-child(3) { animation-delay: 0.2s; }
+  .card:nth-child(4) { animation-delay: 0.25s; }
+  .card:nth-child(5) { animation-delay: 0.3s; }
+  .card:nth-child(6) { animation-delay: 0.35s; }
+  .card:nth-child(7) { animation-delay: 0.4s; }
+  .card:nth-child(8) { animation-delay: 0.45s; }
+  .card:nth-child(9) { animation-delay: 0.5s; }
+
+  @media (max-width: 768px) {
+    header { grid-template-columns: 1fr; }
+    .header-meta { text-align: left; }
+    .stat-row { justify-content: flex-start; }
+    .badge-row { justify-content: flex-start; }
+    .grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<div class="ticker">
+  <div class="ticker-inner">
+    <span>CompTIA A+</span><span>Windows Administration</span><span>Windows Server 2019</span><span>Network+</span><span>Linux Administration</span><span>Cisco CCNA</span><span>CompTIA Security+</span><span>Ethical Hacking</span><span>Digital Forensics</span><span>Active Directory</span><span>Kali Linux</span><span>Metasploit</span><span>Wireshark</span><span>OSPFv2/v3</span><span>PowerShell Scripting</span><span>NIST CSF</span>
+    <span>CompTIA A+</span><span>Windows Administration</span><span>Windows Server 2019</span><span>Network+</span><span>Linux Administration</span><span>Cisco CCNA</span><span>CompTIA Security+</span><span>Ethical Hacking</span><span>Digital Forensics</span><span>Active Directory</span><span>Kali Linux</span><span>Metasploit</span><span>Wireshark</span><span>OSPFv2/v3</span><span>PowerShell Scripting</span><span>NIST CSF</span>
+  </div>
+</div>
+
+<header>
+  <div>
+    <div class="prompt">portfolio.init() — cybersecurity lab work</div>
+    <h1>
+      <span class="line1">Cybersecurity</span>
+      <span class="line2">Lab Portfolio</span>
+      <span class="line3">Hands-on work across 9 courses · 95+ labs</span>
+    </h1>
+  </div>
+  <div class="header-meta">
+    <div class="stat-row">
+      <div class="stat"><div class="stat-num">9</div><div class="stat-label">Courses</div></div>
+      <div class="stat"><div class="stat-num">95+</div><div class="stat-label">Labs</div></div>
+      <div class="stat"><div class="stat-num">400+</div><div class="stat-label">Exercises</div></div>
+    </div>
+    <div class="badge-row">
+      <span class="badge badge-green">CompTIA A+</span>
+      <span class="badge badge-blue">Network+</span>
+      <span class="badge badge-orange">Security+</span>
+      <span class="badge badge-green">CCNA</span>
+      <span class="badge badge-blue">Linux+</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="section-label">lab repositories // 9 courses</div>
+  <div class="grid">
+
+    <a class="card" href="./README.md">
+      <div class="card-glow"></div>
+      <div class="card-top"><span class="card-num">01 / 09</span><span class="card-arrow">↗</span></div>
+      <span class="card-tag tag-a">CompTIA A+</span>
+      <h2>Computer & Networking Fundamentals</h2>
+      <p class="card-desc">Hardware identification, network topologies, TCP/IP, OS configuration, security concepts, helpdesk practice, and IT policies.</p>
+      <div class="card-stats">
+        <div><div class="card-stat-num stat-a">9</div><div class="card-stat-label">Labs</div></div>
+        <div><div class="card-stat-num stat-a">40+</div><div class="card-stat-label">Activities</div></div>
+        <div><div class="card-stat-num stat-a">A+</div><div class="card-stat-label">Aligned</div></div>
+      </div>
+    </a>
+
+    <a class="card" href="./Windows_Admin_PowerShell_README.md">
+      <div class="card-glow"></div>
+      <div class="card-top"><span class="card-num">02 / 09</span><span class="card-arrow">↗</span></div>
+      <span class="card-tag tag-b">Windows Administration</span>
+      <h2>Windows Admin & PowerShell Scripting</h2>
+      <p class="card-desc">Windows 10 installation, user management, NTFS permissions, BitLocker, group policy, network config, recovery, and PowerShell scripting with loops and conditionals.</p>
+      <div class="card-stats">
+        <div><div class="card-stat-num stat-b">9</div><div class="card-stat-label">Labs</div></div>
+        <div><div class="card-stat-num stat-b">86</div><div class="card-stat-label">Exercises</div></div>
+        <div><div class="card-stat-num stat-b">MD-102</div><div class="card-stat-label">Aligned</div></div>
+      </div>
+    </a>
+
+    <a class="card" href="./Windows_Server_Directory_Admin_README.md">
+      <div class="card-glow"></div>
+      <div class="card-top"><span class="card-num">03 / 09</span><span class="card-arrow">↗</span></div>
+      <span class="card-tag tag-c">Windows Server 2019</span>
+      <h2>Windows Server & Directory Administration</h2>
+      <p class="card-desc">Server installation, Hyper-V, Active Directory, DNS/DHCP, IIS, Windows Containers, WSL, RADIUS, DirectAccess, RDS, and performance monitoring.</p>
+      <div class="card-stats">
+        <div><div class="card-stat-num stat-c">12</div><div class="card-stat-label">Labs</div></div>
+        <div><div class="card-stat-num stat-c">50+</div><div class="card-stat-label">Activities</div></div>
+        <div><div class="card-stat-num stat-c">AZ-800</div><div class="card-stat-label">Aligned</div></div>
+      </div>
+    </a>
+
+    <a class="card" href="./Network_Plus_Labs_README.md">
+      <div class="card-glow"></div>
+      <div class="card-top"><span class="card-num">04 / 09</span><span class="card-arrow">↗</span></div>
+      <span class="card-tag tag-a">CompTIA Network+</span>
+      <h2>Network+ Labs</h2>
+      <p class="card-desc">Subnetting, internetworking, static/dynamic routing, VLANs, trunking, Syslog, switchport security, cloud and data center concepts, and network troubleshooting.</p>
+      <div class="card-stats">
+        <div><div class="card-stat-num stat-a">10</div><div class="card-stat-label">Labs</div></div>
+        <div><div class="card-stat-num stat-a">131</div><div class="card-stat-label">Pages</div></div>
+        <div><div class="card-stat-num stat-a">N10-008</div><div class="card-stat-label">Aligned</div></div>
+      </div>
+    </a>
+
+    <a class="card" href="./Linux_Administration_Labs_README.md">
+      <div class="card-glow"></div>
+      <div class="card-top"><span class="card-num">05 / 09</span><span class="card-arrow">↗</span></div>
+      <span class="card-tag tag-d">Linux Administration</span>
+      <h2>Linux Administration Labs</h2>
+      <p class="card-desc">Fedora installation, filesystem management, BASH scripting, process management, Apache, Samba, Postfix email, PostgreSQL database, and SSH remote access.</p>
+      <div class="card-stats">
+        <div><div class="card-stat-num stat-d">12</div><div class="card-stat-label">Labs</div></div>
+        <div><div class="card-stat-num stat-d">185</div><div class="card-stat-label">Pages</div></div>
+        <div><div class="card-stat-num stat-d">LPIC-1</div><div class="card-stat-label">Aligned</div></div>
+      </div>
+    </a>
+
+    <a class="card" href="./Cisco_CCNA_Labs_README.md">
+      <div class="card-glow"></div>
+      <div class="card-top"><span class="card-num">06 / 09</span><span class="card-arrow">↗</span></div>
+      <span class="card-tag tag-b">Cisco CCNA</span>
+      <h2>Cisco Technologies (CCNA) Labs</h2>
+      <p class="card-desc">Physical Cisco hardware — OSPFv2/v3, DHCP relay, VLSM subnetting, STP, LACP EtherChannel, ACLs, NAT/PAT, RADIUS/AAA, HSRP failover, and GRE tunnels.</p>
+      <div class="card-stats">
+        <div><div class="card-stat-num stat-b">14</div><div class="card-stat-label">Labs</div></div>
+        <div><div class="card-stat-num stat-b">Physical</div><div class="card-stat-label">Hardware</div></div>
+        <div><div class="card-stat-num stat-b">200-301</div><div class="card-stat-label">Aligned</div></div>
+      </div>
+    </a>
+
+    <a class="card" href="./Security_Plus_Labs_README.md">
+      <div class="card-glow"></div>
+      <div class="card-top"><span class="card-num">07 / 09</span><span class="card-arrow">↗</span></div>
+      <span class="card-tag tag-c">CompTIA Security+</span>
+      <h2>Security+ Labs</h2>
+      <p class="card-desc">Scapy packet crafting, Mimikatz hash extraction, cloud security with ScoutSuite and Pacu, OAuth/IAM scenarios, OWASP SQL injection, Snort NIDS, and NIST risk management.</p>
+      <div class="card-stats">
+        <div><div class="card-stat-num stat-c">7</div><div class="card-stat-label">Lab Sections</div></div>
+        <div><div class="card-stat-num stat-c">AWS</div><div class="card-stat-label">Cloud Labs</div></div>
+        <div><div class="card-stat-num stat-c">SY0-701</div><div class="card-stat-label">Aligned</div></div>
+      </div>
+    </a>
+
+    <a class="card" href="./Ethical_Hacking_Labs_README.md">
+      <div class="card-glow"></div>
+      <div class="card-top"><span class="card-num">08 / 09</span><span class="card-arrow">↗</span></div>
+      <span class="card-tag tag-e">Ethical Hacking</span>
+      <h2>Ethical Hacking Labs</h2>
+      <p class="card-desc">Full pentest lifecycle — OSINT, GVM/Nessus scanning, Metasploit exploitation, Hashcat, SET phishing, BeEF browser hooking, ZAP proxy, XSS, IDOR, SAM dumps, and AD hardening.</p>
+      <div class="card-stats">
+        <div><div class="card-stat-num stat-e">12</div><div class="card-stat-label">Labs</div></div>
+        <div><div class="card-stat-num stat-e">Full</div><div class="card-stat-label">Kill Chain</div></div>
+        <div><div class="card-stat-num stat-e">CEH</div><div class="card-stat-label">Aligned</div></div>
+      </div>
+    </a>
+
+    <a class="card" href="./IT_Security_Forensics_README.md">
+      <div class="card-glow"></div>
+      <div class="card-top"><span class="card-num">09 / 09</span><span class="card-arrow">↗</span></div>
+      <span class="card-tag tag-a">Digital Forensics</span>
+      <h2>IT Security Forensics Labs</h2>
+      <p class="card-desc">Autopsy investigations, FTK Imager disk imaging, MD5/SHA1 hash verification, WinHex hex analysis, LSB steganography detection, Aid4Mail email forensics, and VM forensics.</p>
+      <div class="card-stats">
+        <div><div class="card-stat-num stat-a">10</div><div class="card-stat-label">Labs</div></div>
+        <div><div class="card-stat-num stat-a">LSB</div><div class="card-stat-label">Steg Detection</div></div>
+        <div><div class="card-stat-num stat-a">CHFI</div><div class="card-stat-label">Aligned</div></div>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="section-label">tools & technologies</div>
+  <div class="tools-grid">
+    <span class="tool-chip">Cisco IOS</span><span class="tool-chip">Packet Tracer</span><span class="tool-chip">Wireshark</span><span class="tool-chip">Nmap</span><span class="tool-chip">OSPFv2/v3</span><span class="tool-chip">Active Directory</span><span class="tool-chip">DNS / DHCP</span><span class="tool-chip">VPN / GRE</span><span class="tool-chip">Kali Linux</span><span class="tool-chip">Metasploit</span><span class="tool-chip">Mimikatz</span><span class="tool-chip">Hashcat</span><span class="tool-chip">John the Ripper</span><span class="tool-chip">Hydra</span><span class="tool-chip">Scapy</span><span class="tool-chip">BeEF</span><span class="tool-chip">SET</span><span class="tool-chip">Snort</span><span class="tool-chip">OWASP ZAP</span><span class="tool-chip">ScoutSuite</span><span class="tool-chip">Pacu (AWS)</span><span class="tool-chip">Docker</span><span class="tool-chip">WSL</span><span class="tool-chip">Hyper-V</span><span class="tool-chip">VirtualBox</span><span class="tool-chip">Autopsy</span><span class="tool-chip">FTK Imager</span><span class="tool-chip">OSForensics</span><span class="tool-chip">WinHex</span><span class="tool-chip">Aid4Mail</span><span class="tool-chip">Volatility</span><span class="tool-chip">PowerShell</span><span class="tool-chip">BASH</span><span class="tool-chip">Windows Server 2019</span><span class="tool-chip">Fedora Linux</span><span class="tool-chip">PostgreSQL</span><span class="tool-chip">Apache httpd</span><span class="tool-chip">Samba</span><span class="tool-chip">Postfix</span>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-left">
+    <span>[Your Name]</span> — Cybersecurity Portfolio<br>
+    Built from hands-on lab work across 9 courses
+  </div>
+  <div class="footer-links">
+    <a href="#">GitHub</a>
+    <a href="#">LinkedIn</a>
+    <a href="#">Email</a>
+  </div>
+</footer>
+
+</body>
+</html>
