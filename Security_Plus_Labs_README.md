@@ -148,4 +148,4 @@ Hands-on labs covering **CompTIA Security+** concepts including offensive tools,
 
 ---
 
-*Portfolio maintained by [Your Name] · [LinkedIn] · [Your Email]*
+*Portfolio maintained by [Oladapo Afolabi] · [https://www.linkedin.com/in/oladapo-afolabi-561834145/] · [oladapokafolabi@gmail.com]*
