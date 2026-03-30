@@ -2,6 +2,7 @@
 
 Hands-on labs covering **CompTIA Security+** concepts including offensive tools, cloud security, identity management, application security, network scanning, intrusion detection, and risk management — using Kali Linux, VirtualBox, and industry-standard security tools.
 
+All screenshots to Labs can be found here : https://docs.google.com/document/d/1yvZiNqmRmdoeEZWrFD_dYUG4iAeJF-5E/edit?usp=drive_link&ouid=102757233326623178029&rtpof=true&sd=true
 ---
 
 ## 📋 Table of Contents
