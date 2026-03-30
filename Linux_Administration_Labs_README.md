@@ -2,6 +2,7 @@
 
 Hands-on labs covering **Linux system administration** from installation and filesystem management through network services, cloud technologies, and database configuration. Completed on **Fedora Linux**.
 
+All screenshots to Labs can be found here : https://docs.google.com/document/d/1TPtar3DZuPJN1jhWSmn5037_ojriz84O/edit?usp=drive_link&ouid=102757233326623178029&rtpof=true&sd=true
 ---
 
 ## 📋 Table of Contents
