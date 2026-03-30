@@ -2,7 +2,7 @@
 
 Hands-on labs covering **Cisco CCNA** concepts completed on physical Cisco Catalyst switches and 4221 routers as well as Cisco Packet Tracer.
 
-Screenshots to all Labs can be found here https://docs.google.com/document/d/1a_m4fAbAlRFIw82M0fXwcdGWlWA6ssO8/edit?usp=drive_link&ouid=102757233326623178029&rtpof=true&sd=true
+**All screenshots to Labs can be found here** : https://docs.google.com/document/d/1a_m4fAbAlRFIw82M0fXwcdGWlWA6ssO8/edit?usp=drive_link&ouid=102757233326623178029&rtpof=true&sd=true
 
 ---
 
