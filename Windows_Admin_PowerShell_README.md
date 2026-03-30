@@ -2,6 +2,7 @@
 
 A collection of hands-on labs focused on **Windows system administration**, **user management**, **data security**, and **PowerShell scripting**. These labs build practical skills directly applicable to IT administration and cybersecurity roles.
 
+All screenshots to Labs can be found here : https://docs.google.com/document/d/1dJcwWXBFHc-UGEdxF3VCT_Qdcgkk74yjPqOGmZvcqok/edit?usp=drive_link
 ---
 
 ## 📋 Table of Contents
