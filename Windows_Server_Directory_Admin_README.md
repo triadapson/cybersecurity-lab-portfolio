@@ -2,6 +2,7 @@
 
 A collection of hands-on labs focused on **Windows Server 2019 administration**, covering server installation, Active Directory, Hyper-V virtualization, resource access, printing, and storage management.
 
+All screenshots to Labs can be found here : https://docs.google.com/document/d/1axL8wXVdVbp7d0-KJMO23N-ox1eH-ccP/edit?usp=drive_link&ouid=102757233326623178029&rtpof=true&sd=true
 ---
 
 ## 📋 Table of Contents
