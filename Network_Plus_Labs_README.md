@@ -2,6 +2,7 @@
 
 Hands-on networking labs covering core **CompTIA Network+** concepts including topology, subnetting, routing, switching, VLANs, security, and troubleshooting using Cisco Packet Tracer.
 
+All screenshots to Labs can be found here : https://docs.google.com/document/d/1d0q29zECAxdTqzeALpOiMSZGqEIgqBHx/edit?usp=drive_link&ouid=102757233326623178029&rtpof=true&sd=true
 ---
 
 ## 📋 Table of Contents
